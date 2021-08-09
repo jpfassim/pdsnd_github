@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import os
 
+# Color class, used to give style to text output
 class color:
    PURPLE = '\033[95m'
    CYAN = '\033[96m'
@@ -16,16 +17,21 @@ class color:
    UNDERLINE = '\033[4m'
    END = '\033[0m'
 
+# Dictionary with city names and data files
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 
+# Dictionary with month names and number
 months = {'january': 1, 'february': 2, 'march': 3, 'april': 4, 'may': 5, 'june': 6, 'all': 99}
 
+# Dictionary with days of the week name and given number
 week = {'monday': 0, 'tuesday': 1, 'wednesday': 2, 'thursday': 3, 'friday': 4, 'saturday': 5, 'sunday': 6, 'all': 99}
 
+# Dictionary with options for filtering data
 filter_opts = {'day': ['all', ''], 'month': ['', 'all'], 'both': ['',''], 'none': ['all', 'all']}
 
+# Function to set filters for data
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
@@ -88,14 +94,16 @@ def get_filters():
     return city, month, day
 
 
+# Function to print message in case option is invalid
 def try_again(input_str):
     clear()
     print(color.BOLD + color.RED + input_str.title() + color.END + ' is not a valid option, please try again')
 
+# Function to clear the screen
 def clear():
     os.system('clear')
 
-
+# Function to load the data according to the chosen city
 def load_data(city, month, day):
     """
     Loads data for the specified city and filters by month and day if applicable.
@@ -118,7 +126,7 @@ def load_data(city, month, day):
     
     return df
     
-
+# Function to get time stats of chosen data
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
@@ -153,7 +161,7 @@ def time_stats(df):
     print('-'*40)
 
 
-
+# Function to get stations stats of chosen data
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
     
@@ -174,7 +182,7 @@ def station_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-
+# Function to get trip duration of chosen data
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
@@ -190,7 +198,7 @@ def trip_duration_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-
+# Function to get user stats of chosen data
 def user_stats(df):
     """Displays statistics on bikeshare users."""
 
@@ -222,7 +230,7 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-    
+# Function to get raw data, no aggregations or other  
 def raw(df):
     row_position, raw_display = 0 ,''
     
@@ -248,6 +256,7 @@ def raw(df):
         if raw_display not in RAW_OPTIONS:
             try_again(raw_display)
 
+# Main function
 def main():
     
     
