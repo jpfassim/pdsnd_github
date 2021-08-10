@@ -45,6 +45,7 @@ def get_filters():
             
     city, month, day, filter_opt = '', '', '', ''
     
+    # City filter loop
     while city not in CITY_DATA:
         print('\nWould you like to see data for')
         for city in CITY_DATA.keys():
@@ -56,6 +57,7 @@ def get_filters():
       
     clear()
     
+    # Date filter loop for given city, day, month or both
     while filter_opt not in filter_opts:
         print('\nWould you like to filter the data for ' + color.BOLD + city.title() + color.END + ' by:')
         for opt in filter_opts:
@@ -65,7 +67,8 @@ def get_filters():
             try_again(filter_opt)
         else:
             month, day = filter_opts[filter_opt]    
-        
+
+    # Month filter  
     if month == '':
         clear()
         while month not in months:
@@ -76,7 +79,8 @@ def get_filters():
 
             if month not in months:
                 try_again(month)
-            
+
+    # Day filter        
     if day == '':
         clear()
         while day not in week:
