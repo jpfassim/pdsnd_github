@@ -46,6 +46,7 @@ def get_filters():
             
     city, month, day, filter_opt = '', '', '', ''
     
+    # City filter loop
     while city not in CITY_DATA:
         print('\nWould you like to see data for')
         for city in CITY_DATA.keys():
@@ -57,6 +58,7 @@ def get_filters():
       
     clear()
     
+    # Date filter loop for given city, day, month or both
     while filter_opt not in filter_opts:
         print('\nWould you like to filter the data for ' + color.BOLD + city.title() + color.END + ' by:')
         for opt in filter_opts:
@@ -66,8 +68,8 @@ def get_filters():
             try_again(filter_opt)
         else:
             month, day = filter_opts[filter_opt]    
-        
-    
+
+    # Month filter  
     if month == '':
         clear()
         while month not in months:
@@ -78,8 +80,8 @@ def get_filters():
 
             if month not in months:
                 try_again(month)
-            
 
+    # Day filter        
     if day == '':
         clear()
         while day not in week:
@@ -103,7 +105,7 @@ def try_again(input_str):
 def clear():
     os.system('clear')
 
-# Function to load the data according to the chosen city
+# Function to load data of selected city
 def load_data(city, month, day):
     """
     Loads data for the specified city and filters by month and day if applicable.
@@ -126,7 +128,7 @@ def load_data(city, month, day):
     
     return df
     
-# Function to get time stats of chosen data
+# Function for time statistics
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
@@ -161,7 +163,7 @@ def time_stats(df):
     print('-'*40)
 
 
-# Function to get stations stats of chosen data
+# Function to get station statistics
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
     
@@ -182,7 +184,7 @@ def station_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-# Function to get trip duration of chosen data
+# Function for trip time statistics
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
@@ -198,7 +200,7 @@ def trip_duration_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-# Function to get user stats of chosen data
+# Function for user statistics
 def user_stats(df):
     """Displays statistics on bikeshare users."""
 
@@ -230,7 +232,7 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-# Function to get raw data, no aggregations or other  
+# Function to display raw data   
 def raw(df):
     row_position, raw_display = 0 ,''
     
